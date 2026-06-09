@@ -1,0 +1,37 @@
+{
+  "name": "pingrep",
+  "version": "0.1.0",
+  "description": "Official PingRep CLI — view PingRep profiles, download vCards, and render QR codes from your terminal. PingRep is the AI Representative platform.",
+  "type": "module",
+  "bin": {
+    "pingrep": "./src/cli.js"
+  },
+  "files": [
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "pingrep",
+    "ai-representative",
+    "networking",
+    "vcard",
+    "qr-code",
+    "profile"
+  ],
+  "homepage": "https://pingrep.com",
+  "repository": "github:pingrep/pingrep",
+  "author": "Keynodex FZ-LLC",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "picocolors": "^1.1.1",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
