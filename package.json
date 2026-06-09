@@ -1,6 +1,6 @@
 {
   "name": "pingrep",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Official PingRep CLI — view PingRep profiles, download vCards, and render QR codes from your terminal. PingRep is the AI Representative platform.",
   "type": "module",
   "bin": {
