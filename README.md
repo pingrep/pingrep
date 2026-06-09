@@ -28,12 +28,37 @@ PingRep lets professionals create a **Personal AI Representative** — an AI tra
 
 ## Developers
 
-Official PingRep developer tools live in this organization. Coming first:
+This repo is home to the official **`pingrep` CLI** — view public PingRep profiles, download vCards, and render QR codes from your terminal.
 
-- **`pingrep` CLI** — fetch public PingRep profiles, vCards, and QR codes from your terminal (`npx pingrep <username>`)
-- **PingRep SDK** — integrate AI Representatives into your own products
+### Install
 
-Watch this repo for releases.
+```bash
+npx pingrep <username>        # no install
+npm install -g pingrep        # or install globally
+```
+
+Requires Node.js 18+.
+
+### Usage
+
+```bash
+pingrep <username>            # view a profile
+pingrep vcard <username>      # save the profile's vCard (-o file.vcf to choose a name)
+pingrep qr <username>         # render the profile QR code in your terminal
+pingrep --help
+```
+
+Set `PINGREP_API_BASE` to point the CLI at a different API host (defaults to `https://api.pingrep.com`).
+
+### Development
+
+```bash
+npm install
+npm test                      # unit + live API contract tests
+node src/cli.js <username>
+```
+
+Also coming to this organization: the **PingRep SDK** — integrate AI Representatives into your own products. Watch this repo for releases.
 
 ## Official channels
 
