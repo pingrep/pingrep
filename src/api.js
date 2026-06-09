@@ -4,8 +4,10 @@
  * Layer: Infrastructure (network only, no formatting or process control).
  */
 
+import { VERSION } from "./version.js";
+
 const DEFAULT_BASE = "https://api.pingrep.com";
-const USER_AGENT = "pingrep-cli/0.1.0";
+const USER_AGENT = `pingrep-cli/${VERSION}`;
 const TIMEOUT_MS = 10_000;
 
 export function apiBase(env = process.env) {

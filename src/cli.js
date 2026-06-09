@@ -12,8 +12,16 @@ import qrcode from "qrcode-terminal";
 import { ApiError, fetchProfile, fetchVcard } from "./api.js";
 import { printBanner } from "./banner.js";
 import { profileUrl, renderProfile } from "./render.js";
+import { maybeNotifyUpdate, runUpdate } from "./update.js";
+import { VERSION } from "./version.js";
 
 const program = new Command();
+
+/** Banner + (cached) update notice, shown before every profile command. */
+function preamble() {
+  printBanner();
+  maybeNotifyUpdate();
+}
 
 function fail(err, username) {
   if (err instanceof ApiError && err.status === 404) {
@@ -30,13 +38,13 @@ function fail(err, username) {
 program
   .name("pingrep")
   .description("View PingRep profiles, download vCards, and render QR codes.")
-  .version("0.1.0");
+  .version(VERSION);
 
 program
   .command("view <username>", { isDefault: true })
   .description("Show a PingRep profile (default command: `pingrep <username>`)")
   .action(async (username) => {
-    printBanner();
+    preamble();
     try {
       const profile = await fetchProfile(username);
       console.log(renderProfile(profile));
@@ -50,7 +58,7 @@ program
   .description("Download a profile's vCard (.vcf)")
   .option("-o, --out <file>", "output file (default: <username>.vcf)")
   .action(async (username, opts) => {
-    printBanner();
+    preamble();
     try {
       const profile = await fetchProfile(username);
       const vcf = await fetchVcard(profile.id);
@@ -66,12 +74,20 @@ program
   .command("qr <username>")
   .description("Render a profile QR code in the terminal")
   .action((username) => {
-    printBanner();
+    preamble();
     const url = profileUrl(username);
     qrcode.generate(url, { small: true }, (code) => {
       console.log(code);
       console.log(`  ${pc.cyan(url)}\n`);
     });
+  });
+
+program
+  .command("update")
+  .description("Update pingrep to the latest published version")
+  .action(() => {
+    printBanner();
+    runUpdate();
   });
 
 program.parseAsync(process.argv);
