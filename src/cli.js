@@ -11,6 +11,7 @@ import pc from "picocolors";
 import qrcode from "qrcode-terminal";
 import { ApiError, fetchProfile, fetchVcard } from "./api.js";
 import { printBanner } from "./banner.js";
+import { runChat } from "./chat.js";
 import { profileUrl, renderProfile } from "./render.js";
 import { maybeNotifyUpdate, runUpdate } from "./update.js";
 import { VERSION } from "./version.js";
@@ -80,6 +81,18 @@ program
       console.log(code);
       console.log(`  ${pc.cyan(url)}\n`);
     });
+  });
+
+program
+  .command("chat <username>")
+  .description("Chat with a profile's AI Representative")
+  .action(async (username) => {
+    preamble();
+    try {
+      await runChat(username);
+    } catch (err) {
+      fail(err, username);
+    }
   });
 
 program

@@ -42,13 +42,20 @@ Requires Node.js 18+.
 ### Usage
 
 ```bash
+pingrep chat <username>       # chat with a profile's AI Representative
 pingrep <username>            # view a profile
 pingrep vcard <username>      # save the profile's vCard (-o file.vcf to choose a name)
 pingrep qr <username>         # render the profile QR code in your terminal
+pingrep update                # update to the latest version
 pingrep --help
 ```
 
-Set `PINGREP_API_BASE` to point the CLI at a different API host (defaults to `https://api.pingrep.com`).
+`chat` streams answers live from the profile owner's AI Rep — the same Rep that
+answers on their PingRep page. No API key needed; the Rep runs on PingRep's side.
+
+Set `PINGREP_API_BASE` to point the CLI at a different API host (defaults to
+`https://api.pingrep.com`). Set `PINGREP_NO_UPDATE_CHECK=1` to disable the
+daily update notice.
 
 ### Development
 
